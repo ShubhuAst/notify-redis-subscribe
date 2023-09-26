@@ -1,5 +1,6 @@
-package com.smtp.notify.service;
+package com.smtp.notify.service.impls;
 
+import com.smtp.notify.service.RedisSubscriberService;
 import com.smtp.notify.subscribe.RedisSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.listener.ChannelTopic;

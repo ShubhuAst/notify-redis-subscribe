@@ -1,6 +1,8 @@
 package com.smtp.notify.configuration;
 
+import com.smtp.notify.service.EmailService;
 import com.smtp.notify.subscribe.RedisMessageListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -13,6 +15,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 public class RedisConfig {
+
+    @Autowired
+    EmailService emailService;
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
@@ -29,8 +34,9 @@ public class RedisConfig {
 
     @Bean
     public MessageListenerAdapter listenerAdapter(){
-        return new MessageListenerAdapter(new RedisMessageListener());
+        return new MessageListenerAdapter(new RedisMessageListener(emailService));
     }
+
     @Bean
     public RedisMessageListenerContainer getRedisMessageListenerContainer(){
         RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();

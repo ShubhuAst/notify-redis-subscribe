@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisMessageListener implements MessageListener {
 
+    private final EmailService emailService;
+
     @Autowired
-    private EmailService emailService;
+    public RedisMessageListener(EmailService emailService){
+        this.emailService = emailService;
+    }
 
     @Override
     public void onMessage(Message message, byte[] pattern) {
