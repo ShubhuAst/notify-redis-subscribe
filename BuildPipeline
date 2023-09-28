@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image'){
+        stage('Build Docker Image') {
             steps {
                 script {
                     sh "docker build -t astshubhu/notify ."
@@ -31,8 +31,8 @@ pipeline {
         }
 
         stage('Push Docker Image to Hub'){
-            steps{
-                script{
+            steps {
+                script {
                     withCredentials([string(credentialsId: 'dockerHubCred', variable: 'docker_hub_cred')]) {
                         sh "docker login -u astshubhu -p ${docker_hub_cred}"
                     }
@@ -42,8 +42,8 @@ pipeline {
 
         }
 
-//        stage{
-//            steps('Trigger Deploy Notify') {
+//        stage('Trigger Deploy Notify') {
+//            steps {
 //                build job: 'deploy-notify'
 //            }
 //        }
