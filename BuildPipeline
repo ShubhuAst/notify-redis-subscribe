@@ -23,18 +23,23 @@ pipeline {
         }
 
         stage('Build Docker Image'){
-            script{
-                sh "docker build -t astshubhu/notify ."
+            steps {
+                script {
+                    sh "docker build -t astshubhu/notify ."
+                }
             }
         }
 
         stage('Push Docker Image to Hub'){
-            script{
-                withCredentials([string(credentialsId: 'dockerHubCred', variable: 'docker_hub_cred')]) {
-                    sh "docker login -u astshubhu -p ${docker_hub_cred}"
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerHubCred', variable: 'docker_hub_cred')]) {
+                        sh "docker login -u astshubhu -p ${docker_hub_cred}"
+                    }
+                    sh "docker push astshubhu/notify"
                 }
-                sh "docker push astshubhu/notify"
             }
+
         }
 
 //        stage{
