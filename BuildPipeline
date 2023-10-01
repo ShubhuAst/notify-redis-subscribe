@@ -42,10 +42,10 @@ pipeline {
 
         }
 
-//        stage('Trigger Deploy Notify') {
-//            steps {
-//                build job: 'deploy-notify'
-//            }
-//        }
+        stage('Trigger Deploy Notify') {
+            steps {
+                build job: 'deploy-notify'
+            }
+        }
     }
 }

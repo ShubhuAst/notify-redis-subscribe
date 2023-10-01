@@ -19,10 +19,12 @@ public class RedisConfig {
     @Autowired
     EmailService emailService;
 
+    private String host_redis_standalone = System.getenv("REDIS_STANDALONE_HOST");
+
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
-        connectionFactory.setHostName("redis-standalone");
+        connectionFactory.setHostName(host_redis_standalone);
         connectionFactory.setPort(30007);
         return connectionFactory;
     }
