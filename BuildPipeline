@@ -41,11 +41,10 @@ pipeline {
             }
 
         }
-
-        stage('Trigger Deploy Notify') {
-            steps {
-                build job: 'deploy-notify'
-            }
+    }
+    post {
+        success {
+            build job: 'deploy-notify'
         }
     }
 }
